@@ -1,4 +1,4 @@
-<script>
+
 document.addEventListener('DOMContentLoaded', function() {
 // Define an array of objects, each containing the class name and image URL.
 var cursorElements = [
@@ -57,10 +57,10 @@ cursorElements.forEach(function(element) {
 }); // Close the forEach loop correctly
 }); // Correctly close the DOMContentLoaded function
 
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script>
+
+
+
 const gallerySlider = new Swiper(".swiper.is-gallery", {
   // Parameters
   loop: true,
@@ -74,9 +74,9 @@ const gallerySlider = new Swiper(".swiper.is-gallery", {
     prevEl: '.button-left',
   } // Close the navigation object correctly
 }); // Close the Swiper initialization correctly
-</script>
 
-<script>
+
+
 // Function to handle adding/removing classes based on viewport width
 function handleSupervisorStyles() {
 // Check if the viewport width is 991px or greater
@@ -130,9 +130,9 @@ if (supervisors.length > 1) {
   });
 }
 }
-</script>
 
-<script>
+
+
 // Select all the .room elements inside .room-grid
 const rooms = document.querySelectorAll('.room-grid .room');
 
@@ -154,10 +154,10 @@ if ((index + 1) % 2 === 0) {
   }
 }
 });
-</script>
 
 
-<script>
+
+
 // Get the play button and lightbox video elements
 const playButton = document.querySelector('.play-button');
 const lightboxVideo = document.querySelector('#fullscreen-video');
@@ -179,7 +179,7 @@ lightboxVideo.currentTime = 0; // Reset video to start (optional)
 });
 
 
-</script>
+
 
 
 
