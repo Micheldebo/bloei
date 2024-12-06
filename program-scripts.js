@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // Define an array of objects, each containing the class name and image URL.
 var cursorElements = [
 {
-  className: 'button-right',
-  imageUrl: 'https://cdn.prod.website-files.com/66bef0bef6cb13624d51d95b/66cedc79aeb8a340f1671630_slider-next.svg'
+className: 'button-right',
+imageUrl: 'https://cdn.prod.website-files.com/66bef0bef6cb13624d51d95b/66cedc79aeb8a340f1671630_slider-next.svg'
 },
 {
-  className: 'button-left',
-  imageUrl: 'https://cdn.prod.website-files.com/66bef0bef6cb13624d51d95b/66cedc79bc5b2155823ab0df_slider-prev.svg'
+className: 'button-left',
+imageUrl: 'https://cdn.prod.website-files.com/66bef0bef6cb13624d51d95b/66cedc79bc5b2155823ab0df_slider-prev.svg'
 }
 ]; // Correctly close the array here
 
@@ -23,22 +23,22 @@ var targetX = 0;
 var targetY = 0;
 
 document.addEventListener('mousemove', function(e) {
-  targetX = e.clientX;
-  targetY = e.clientY;
+targetX = e.clientX;
+targetY = e.clientY;
 });
 
 function updateCursor() {
-  var currentX = parseInt(cursorImage.style.left) || 0;
-  var currentY = parseInt(cursorImage.style.top) || 0;
-  var dx = targetX - currentX;
-  var dy = targetY - currentY;
-  var vx = dx * 0.3;
-  var vy = dy * 0.3;
+var currentX = parseInt(cursorImage.style.left) || 0;
+var currentY = parseInt(cursorImage.style.top) || 0;
+var dx = targetX - currentX;
+var dy = targetY - currentY;
+var vx = dx * 0.3;
+var vy = dy * 0.3;
 
-  cursorImage.style.left = currentX + vx + 'px';
-  cursorImage.style.top = currentY + vy + 'px';
+cursorImage.style.left = currentX + vx + 'px';
+cursorImage.style.top = currentY + vy + 'px';
 
-  requestAnimationFrame(updateCursor);
+requestAnimationFrame(updateCursor);
 }
 
 updateCursor();
@@ -46,13 +46,13 @@ updateCursor();
 // Add event listeners for hover effect on elements with the specified class name.
 var elements = document.querySelectorAll('.' + element.className);
 elements.forEach(function(el) {
-  el.addEventListener('mouseenter', function() {
-    cursorImage.style.transform = 'translate(-50%, -50%) scale(1)';
-  });
+el.addEventListener('mouseenter', function() {
+  cursorImage.style.transform = 'translate(-50%, -50%) scale(1)';
+});
 
-  el.addEventListener('mouseleave', function() {
-    cursorImage.style.transform = 'translate(-50%, -50%) scale(0)';
-  });
+el.addEventListener('mouseleave', function() {
+  cursorImage.style.transform = 'translate(-50%, -50%) scale(0)';
+});
 });
 }); // Close the forEach loop correctly
 }); // Correctly close the DOMContentLoaded function
@@ -67,28 +67,21 @@ speed: 800,
 grabCursor: true,
 parallax: true,
 navigation: {
-  nextEl: '.button-right',
-  prevEl: '.button-left',
+nextEl: '.button-right',
+prevEl: '.button-left',
 } // Close the navigation object correctly
 }); // Close the Swiper initialization correctly
 
-// Function to handle adding/removing classes based on viewport width
 function handleSupervisorStyles() {
-// Check if the viewport width is 991px or greater
 const isDesktop = window.matchMedia('(min-width: 991px)').matches;
-
-// Get all elements with the class .supervisor within .supervisor-list
 const supervisors = document.querySelectorAll('.supervisor-list .supervisor');
 
-// Proceed only if there is at least one supervisor element
 if (supervisors.length > 0) {
   supervisors.forEach((supervisor, index) => {
-    const isEven = (index + 1) % 2 === 0; // Target every second supervisor (2, 4, 6,...)
+    const isEven = (index + 1) % 2 === 0;
 
-    // Toggle the .even class for every second supervisor
     supervisor.classList.toggle('even', isDesktop && isEven);
 
-    // List of elements to modify with specific classes
     const elements = {
       supervisorTitle: '.supervisor-column.text .supervisor-title',
       h4: '.supervisor-column.text .h4',
@@ -98,10 +91,10 @@ if (supervisors.length > 0) {
       sideWrapper: '.supervisor-column.video-image .side-wrapper'
     };
 
-    // Modify classes based on desktop view and if the supervisor is even
     if (isEven) {
       supervisor.querySelectorAll(elements.supervisorTitle + ', ' + elements.h4 + ', ' + elements.label).forEach(el => {
         el.classList.toggle('white', isDesktop);
+        el.classList.toggle('default-text-color', !isDesktop);
       });
 
       const richText = supervisor.querySelector(elements.richText);
@@ -114,13 +107,14 @@ if (supervisors.length > 0) {
       if (button) {
         button.classList.toggle('button-secondary_red-white', isDesktop);
         button.classList.toggle('button-secondary_red', !isDesktop);
-        Webflow.require('ix2').init(); // Reinitialize Webflow interactions
       }
 
       const sideWrapper = supervisor.querySelector(elements.sideWrapper);
       if (sideWrapper) {
         sideWrapper.classList.toggle('reverse-border', isDesktop);
       }
+
+      Webflow.require('ix2').init(); // Reinitialize Webflow interactions
     }
   });
 }
@@ -141,12 +135,12 @@ const roomTag = room.querySelector('.room-tag');
 
 // Add .reverse-border to .room-image-wrap
 if (roomImageWrap) {
-  roomImageWrap.classList.add('reverse-border');
+roomImageWrap.classList.add('reverse-border');
 }
 
 // Add .reverse to .room-tag
 if (roomTag) {
-  roomTag.classList.add('reverse');
+roomTag.classList.add('reverse');
 }
 }
 });
