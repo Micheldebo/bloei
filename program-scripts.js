@@ -168,6 +168,90 @@ lightboxVideo.muted = true; // Mute the video
 lightboxVideo.currentTime = 0; // Reset video to start (optional)
 });
 
+<script>
+  $('[data-click="faq"]').click(function(){
+    if(!$(this).is('.open')){
+      $('[data-click="faq"].open').each((i, item)=>{
+        item.click();
+      });
+      $(this).addClass('open');    
+    }
+    else{
+      $(this).removeClass('open');
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const cmsGrid = document.querySelector('.room-grid');
+    const cmsItems = cmsGrid.querySelectorAll('.w-dyn-item');
+    const itemCount = cmsItems.length;
+
+    // Check if the viewport is desktop (adjust width as needed)
+    if (window.innerWidth >= 992) {
+      // Clear all grid styles
+      cmsGrid.style.gridTemplateColumns = '';
+      cmsGrid.style.justifyContent = '';
+
+      // Apply styles based on item count
+      if (itemCount === 1) {
+        cmsGrid.style.display = 'flex';
+        cmsGrid.style.justifyContent = 'center';
+      } else if (itemCount === 2 || itemCount === 4) {
+        cmsGrid.style.display = 'grid';
+        cmsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+      } else if (itemCount === 3 || itemCount === 6) {
+        cmsGrid.style.display = 'grid';
+        cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      } else if (itemCount === 5) {
+        cmsGrid.style.display = 'grid';
+        cmsGrid.style.gridTemplateRows = 'auto auto';
+        cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        cmsItems[3].style.gridColumn = 'span 2';
+      }
+    }
+  });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.multi-ref-list-wrapper .w-dyn-item');
+  const showMoreButton = document.querySelector('.show-more-button');
+  
+  const itemsToShow = 5; // Number of items to show per click
+  let currentlyVisible = itemsToShow;
+
+  // Hide all items beyond the initial limit
+  items.forEach((item, index) => {
+    if (index >= itemsToShow) {
+      item.style.display = 'none';
+    }
+  });
+
+  // Show more items when the button is clicked
+  if (showMoreButton) {
+    showMoreButton.addEventListener('click', () => {
+      const newLimit = currentlyVisible + itemsToShow;
+      
+      items.forEach((item, index) => {
+        if (index < newLimit) {
+          item.style.display = 'block';
+        }
+      });
+
+      currentlyVisible = newLimit;
+
+      // Hide the button if all items are visible
+      if (currentlyVisible >= items.length) {
+        showMoreButton.style.display = 'none';
+      }
+    });
+  }
+
+  // Hide the button if there are no extra items
+  if (items.length <= itemsToShow && showMoreButton) {
+    showMoreButton.style.display = 'none';
+  }
+});
+
 
 
 
