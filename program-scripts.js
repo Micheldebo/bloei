@@ -122,34 +122,53 @@ $('[data-click="faq"]').click(function(){
 
 document.addEventListener("DOMContentLoaded", function () {
   const cmsGrid = document.querySelector('.room-grid');
-  const cmsItems = cmsGrid.querySelectorAll('.w-dyn-item');
-  const itemCount = cmsItems.length;
 
-  // Check if the viewport is desktop (adjust width as needed)
-  if (window.innerWidth >= 992) {
-    // Clear all grid styles
-    cmsGrid.style.gridTemplateColumns = '';
-    cmsGrid.style.justifyContent = '';
+  if (cmsGrid) { // Check if cmsGrid exists
+    const cmsItems = cmsGrid.querySelectorAll('.w-dyn-item');
+    const itemCount = cmsItems.length;
 
-    // Apply styles based on item count
-    if (itemCount === 1) {
-      cmsGrid.style.display = 'flex';
-      cmsGrid.style.justifyContent = 'center';
-    } else if (itemCount === 2 || itemCount === 4) {
-      cmsGrid.style.display = 'grid';
-      cmsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-    } else if (itemCount === 3 || itemCount === 6) {
-      cmsGrid.style.display = 'grid';
-      cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
-    } else if (itemCount === 5) {
-      cmsGrid.style.display = 'grid';
-      cmsGrid.style.gridTemplateRows = 'auto auto';
-      cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
-      cmsItems[3].style.gridColumn = 'span 2';
+    if (window.innerWidth >= 992) {
+      // Clear previous grid styles
+      cmsGrid.style.gridTemplateColumns = '';
+      cmsGrid.style.justifyContent = '';
+
+      if (itemCount === 1) {
+        cmsGrid.style.display = 'flex';
+        cmsGrid.style.justifyContent = 'center';
+      } else if (itemCount === 2 || itemCount === 4) {
+        cmsGrid.style.display = 'grid';
+        cmsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+      } else if (itemCount === 3 || itemCount === 6) {
+        cmsGrid.style.display = 'grid';
+        cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      } else if (itemCount === 5) {
+        cmsGrid.style.display = 'grid';
+        cmsGrid.style.gridTemplateRows = 'auto auto';
+        cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        cmsItems[3]?.style.gridColumn = 'span 2'; // Safe query for the 4th item
+      }
     }
+  } else {
+    console.error("Error: '.room-grid' not found.");
   }
 });
 
+window.addEventListener('resize', () => {
+  // Call the function again to apply grid styles on viewport resize
+  handleGridStyles();
+});
+
+function handleGridStyles() {
+  const cmsGrid = document.querySelector('.room-grid');
+  if (cmsGrid) {
+    const cmsItems = cmsGrid.querySelectorAll('.w-dyn-item');
+    const itemCount = cmsItems.length;
+
+    if (window.innerWidth >= 992) {
+      // Reapply grid styles based on item count
+    }
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 const items = document.querySelectorAll('.multi-ref-list-wrapper .w-dyn-item');
@@ -190,9 +209,4 @@ if (items.length <= itemsToShow && showMoreButton) {
   showMoreButton.style.display = 'none';
 }
 });
-
-
-
-
-
 
