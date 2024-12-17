@@ -91,7 +91,7 @@ roomTag.classList.add('reverse');
 // Get the play button and lightbox video elements
 const playButton = document.querySelector('.play-button');
 const lightboxVideo = document.querySelector('#fullscreen-video');
-const closeLightbox = document.querySelector('.close-lightbox');
+const closeLightbox = document.querySelector('.close-button');
 
 // Trigger play and unmute video when play button is clicked
 playButton.addEventListener('click', function () {
