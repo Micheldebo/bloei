@@ -91,19 +91,26 @@ const lightboxVideo = document.querySelector('#fullscreen-video');
 const closeLightbox = document.querySelector('.close-button');
 
 // Trigger play and unmute video when play button is clicked
-playButton.addEventListener('click', function () {
-  const videoSrc = document.querySelector('video').getAttribute('src'); // Adjust this selector to your actual video element
-  lightboxVideo.setAttribute('src', videoSrc);
-  lightboxVideo.muted = false; // Ensure video is unmuted
-  lightboxVideo.play(); // Start playing the video
-});
+if (playButton && lightboxVideo) { // Ensure elements exist
+  playButton.addEventListener('click', function () {
+    const videoElement = document.querySelector('video'); // Adjust this selector to your actual video element
+    if (videoElement) {
+      const videoSrc = videoElement.getAttribute('src');
+      lightboxVideo.setAttribute('src', videoSrc);
+      lightboxVideo.muted = false; // Ensure video is unmuted
+      lightboxVideo.play(); // Start playing the video
+    }
+  });
+}
 
 // Stop and mute the video when the close button is clicked
-closeLightbox.addEventListener('click', function () {
-  lightboxVideo.pause(); // Pause the video
-  lightboxVideo.muted = true; // Mute the video
-  lightboxVideo.currentTime = 0; // Reset video to start (optional)
-});
+if (closeLightbox && lightboxVideo) { // Ensure elements exist
+  closeLightbox.addEventListener('click', function () {
+    lightboxVideo.pause(); // Pause the video
+    lightboxVideo.muted = true; // Mute the video
+    lightboxVideo.currentTime = 0; // Reset video to start (optional)
+  });
+}
 
 $('[data-click="faq"]').click(function () {
   if (!$(this).is('.open')) {
@@ -141,7 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
         cmsGrid.style.display = 'grid';
         cmsGrid.style.gridTemplateRows = 'auto auto';
         cmsGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
-        cmsItems[3]?.style.gridColumn = 'span 2'; // Safe query for the 4th item
+        if (cmsItems[3]) { // Fixed the invalid assignment
+          cmsItems[3].style.gridColumn = 'span 2'; // Safe assignment for the 4th item
+        }
       }
     }
   } else {
@@ -161,6 +170,7 @@ function handleGridStyles() {
 
     if (window.innerWidth >= 992) {
       // Reapply grid styles based on item count
+      // (You can implement similar logic as above if needed)
     }
   }
 }
